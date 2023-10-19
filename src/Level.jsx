@@ -6,7 +6,7 @@ import BlockAxe from "@/components/Axe/BlockAxe";
 import BlockEnd from "@/components/BlockEnd";
 import Block from "@/components/Reusability/Block";
 import { useMemo } from "react";
-import StringArrayToComponents from "@/lib/utils/ArrayToComponent";
+
 import Bounds from "@/components/Bounds";
 
 export default function Level({
@@ -16,6 +16,7 @@ export default function Level({
     BlockLimbo,
     BlockAxe,
   ],
+  seed,
 }) {
   const blocks = useMemo(() => {
     const blocks = [];
@@ -26,9 +27,8 @@ export default function Level({
     }
 
     return blocks;
-  }, [count, types]);
+  }, [count, types, seed]);
 
-  console.log(StringArrayToComponents(blocks));
   return (
     <>
       <Bounds length={count + 2} />
@@ -43,7 +43,7 @@ export default function Level({
             />
           );
         } else {
-          <BlockType key={i} />;
+          return <BlockType key={i} position={[0, 0, -(i + 1) * 4]} />;
         }
       })}
       <BlockEnd position={[0, 0, -(blocks.length + 1) * 4]} />

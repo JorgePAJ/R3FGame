@@ -1,5 +1,5 @@
 import { useFrame } from "@react-three/fiber";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { RigidBody } from "@react-three/rapier";
 import * as THREE from "three";
 
@@ -14,7 +14,17 @@ export default function ObstacleAxe({
 }) {
   const obstacleRef = useRef();
   const [timeOffset] = useState(() => Math.random() * Math.PI * 2);
+  const [speed] = useState(
+    () => (Math.random() + 0.2) * (Math.random() < 0.5 ? -1 : 1)
+  );
+  useEffect(() => {
+    const rotation = new THREE.Quaternion();
+    rotation.setFromEuler(new THREE.Euler(0, 0.6 * speed, 0));
 
+    if (obstacleRef.current) {
+      obstacleRef.current.setNextKinematicRotation(rotation);
+    }
+  }, []);
   useFrame((state) => {
     const time = state.clock.getElapsedTime();
     const x = Math.sin(time + timeOffset) * 1.25;

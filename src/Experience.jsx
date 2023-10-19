@@ -1,17 +1,27 @@
-import { OrbitControls } from "@react-three/drei";
 import { Physics } from "@react-three/rapier";
-import Lights from "./Lights.jsx";
-import Level from "./Level.jsx";
-import { Perf } from "r3f-perf";
+import BlockLimbo from "@/components/Limbo/BlockLimbo";
+import Lights from "@/Lights.jsx";
+import Level from "@/Level.jsx";
+import Player from "@/components/Player.jsx";
+import BlockAxe from "@/components/Axe/BlockAxe";
+import useGame from "@/stores/useGame";
+import BlockSpinner from "@/components/Spinner/BlockSpinner";
 
 export default function Experience() {
+  const blocksCount = useGame((state) => state.blocksCount);
+  const blocksSeed = useGame((state) => state.blocksSeed);
   return (
     <>
-      <OrbitControls makeDefault />
-      <Perf />
-      <Physics debug>
+      {/* <Perf /> */}
+      <color args={["#bdedfc"]} attach="background" />
+      <Physics>
         <Lights />
-        <Level count={3} types={["spinner", "axe"]} />
+        <Level
+          count={blocksCount}
+          types={[BlockAxe, BlockLimbo, BlockSpinner]}
+          seed={blocksSeed}
+        />
+        <Player />
       </Physics>
     </>
   );

@@ -1,4 +1,4 @@
-import { useGLTF } from "@react-three/drei";
+import { Text3D, useGLTF } from "@react-three/drei";
 import { RigidBody } from "@react-three/rapier";
 import * as THREE from "three";
 
@@ -17,6 +17,16 @@ export default function BlockEnd({
 
   return (
     <group position={position}>
+      <Text3D
+        font={"./assets/fonts/Geomanist_Medium.json"}
+        size={0.75}
+        height={0.2}
+        scale={1}
+        position={[-1.5, 1, 2]}
+      >
+        FINISH
+        <meshBasicMaterial toneMapped={false} color="white" />
+      </Text3D>
       <mesh
         geometry={geometry}
         material={material}

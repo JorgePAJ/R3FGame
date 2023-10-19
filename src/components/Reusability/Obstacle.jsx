@@ -1,5 +1,5 @@
 import { useFrame } from "@react-three/fiber";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { RigidBody } from "@react-three/rapier";
 import * as THREE from "three";
 
@@ -20,6 +20,17 @@ export default function ObstacleLimbo({
 
   const [timeOffset] = useState(() => Math.random() * Math.PI * 2);
 
+  useEffect(() => {
+    if (type === "axe") {
+      const rotation = new THREE.Quaternion();
+      rotation.setFromEuler(new THREE.Euler(0, 0.6 * speed, 0));
+
+      if (obstacleRef.current) {
+        obstacleRef.current.setNextKinematicRotation(rotation);
+      }
+    }
+  }, []);
+
   useFrame((state) => {
     const time = state.clock.getElapsedTime();
     if (type === "spinner") {
@@ -39,11 +50,12 @@ export default function ObstacleLimbo({
         });
       }
     } else if (type === "axe") {
-      const y = Math.sin(time) + 1.15;
+      const x = Math.sin(time + timeOffset) * 1.25;
+
       if (obstacleRef.current) {
         obstacleRef.current.setNextKinematicTranslation({
-          x: position[0],
-          y: position[1] + y,
+          x: position[0] + x,
+          y: position[1] + 0.75,
           z: position[2],
         });
       }

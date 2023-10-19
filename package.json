@@ -8,16 +8,24 @@
     "build": "vite build"
   },
   "devDependencies": {
+    "@types/node": "^20.8.7",
     "@vitejs/plugin-react": "4.0",
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.31",
+    "tailwindcss": "^3.3.3",
     "vite": "^4.3.9"
   },
   "dependencies": {
     "@react-three/drei": "^9.77.4",
     "@react-three/fiber": "^8.13.0",
     "@react-three/rapier": "1.0",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.0.0",
     "r3f-perf": "^7.1.2",
     "react": "18.2",
     "react-dom": "18.2",
-    "three": "^0.153.0"
+    "tailwind-merge": "^1.14.0",
+    "three": "^0.153.0",
+    "zustand": "4.3"
   }
 }
