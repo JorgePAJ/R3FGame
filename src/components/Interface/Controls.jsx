@@ -35,6 +35,7 @@ export default function Controls() {
         "pointer-events-auto ",
         "cursor-pointer",
         "hover:bg-white/70 active:bg-white/80",
+        "select-none",
       ],
       {
         variants: {
@@ -58,6 +59,7 @@ export default function Controls() {
         "transition-all ,duration-200",
         "pointer-events-auto ",
         "cursor-pointer",
+        "select-none",
         "hover:bg-white/70 active:bg-white/80",
       ],
       {
